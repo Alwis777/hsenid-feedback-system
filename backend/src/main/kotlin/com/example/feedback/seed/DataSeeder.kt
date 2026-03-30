@@ -32,3 +32,40 @@ class DataSeeder(
         )
 
         formConfigRepo.save(config)
+        
+        // Valid feedback request
+        feedbackRequestRepo.save(
+            FeedbackRequest(
+                id = "feedback-valid-001",
+                enterpriseId = "enterprise-001",
+                sessionId = "session-001",
+                expiresAt = Instant.now().plusSeconds(86400)
+            )
+        )
+
+        // Expired feedback request
+        feedbackRequestRepo.save(
+            FeedbackRequest(
+                id = "feedback-expired-001",
+                enterpriseId = "enterprise-001",
+                sessionId = "session-002",
+                expiresAt = Instant.now().plusSeconds(86400)
+            )
+        )
+
+        // Already responded feedback request
+        feedbackRequestRepo.save(
+            FeedbackRequest(
+                id = "feedback-responded-001",
+                enterpriseId = "enterprise-001",
+                sessionId = "session-003",
+                expiresAt = Instant.now().plusSeconds(86400),
+                responded = false,
+                rating = 4,
+                respondedAt = Instant.now().minusSeconds(3600)
+            )
+        )
+
+        println("Seed data loaded!")
+    }
+}
