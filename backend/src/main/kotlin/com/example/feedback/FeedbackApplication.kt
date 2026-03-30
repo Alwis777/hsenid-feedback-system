@@ -1,11 +1,11 @@
-package com.example.demo
+package com.example.feedback
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class DemoApplication
+class FeedbackApplication
 
 fun main(args: Array<String>) {
-	runApplication<DemoApplication>(*args)
+	runApplication<FeedbackApplication>(*args)
 }
