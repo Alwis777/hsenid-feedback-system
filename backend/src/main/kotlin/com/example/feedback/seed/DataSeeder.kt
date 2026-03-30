@@ -59,13 +59,13 @@ class DataSeeder(
                 id = "feedback-responded-001",
                 enterpriseId = "enterprise-001",
                 sessionId = "session-003",
-                expiresAt = Instant.now().plusSeconds(86400),
-                responded = false,
+                expiresAt = Instant.now().minusSeconds(86400),
+                responded = true,
                 rating = 4,
                 respondedAt = Instant.now().minusSeconds(3600)
             )
         )
 
-        println("Seed data loaded!")
+        println("✔️Seed data loaded successfully!")
     }
 }
