@@ -40,16 +40,6 @@ class AdminController(
         return ResponseEntity.ok(saved)
     }
 
-    data class FeedbackFormConfigRequest(
-    val headerText: String = "",
-    val headerDescription: String? = null,
-    val footerText: String? = null,
-    val ratingLabels: List<String> = emptyList(),
-    val thankYouText: String = "",
-    val invalidReplyText: String = "",
-    val expiredReplyText: String = "",
-    val skipForChannels: List<String> = emptyList()
-)
 
 @PutMapping("/{enterpriseId}/session-feedback-form")
     fun saveForm(
@@ -108,3 +98,14 @@ class AdminController(
         val saved = service.saveConfig(enterpriseId, config)
         return ResponseEntity.ok(saved)
     }
+
+ data class FeedbackFormConfigRequest(
+    val headerText: String = "",
+    val headerDescription: String? = null,
+    val footerText: String? = null,
+    val ratingLabels: List<String> = emptyList(),
+    val thankYouText: String = "",
+    val invalidReplyText: String = "",
+    val expiredReplyText: String = "",
+    val skipForChannels: List<String> = emptyList()
+)
