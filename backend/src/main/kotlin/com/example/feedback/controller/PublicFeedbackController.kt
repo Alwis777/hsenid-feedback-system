@@ -39,3 +39,49 @@ class PublicFeedbackController(
         ))
     }
 }
+
+@PostMapping("/{feedbackId}/respond")
+    fun respond(
+        @PathVariable feedbackId: String,
+        @RequestBody body: RespondRequest
+    ): ResponseEntity<Any> {
+
+        if (body.rating < 1 || body.rating > 5) {
+            return ResponseEntity.badRequest()
+                .body(mapOf("error" to "Rating must be between 1 and 5"))
+        }
+
+        return when (feedbackRequestService.respond(feedbackId, body.rating)) {
+            RespondResult.SUCCESS ->
+                ResponseEntity.ok(mapOf("message" to "Thank you for your feedback!"))
+            RespondResult.NOT_FOUND ->
+                ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(mapOf("error" to "Feedback request not found"))
+            RespondResult.EXPIRED ->
+                ResponseEntity.status(HttpStatus.GONE)
+                    .body(mapOf("error" to "This feedback link has expired"))
+            RespondResult.ALREADY_RESPONDED ->
+                ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(mapOf("error" to "Feedback has already been submitted"))
+            RespondResult.INVALID_RATING ->
+                ResponseEntity.badRequest()
+                    .body(mapOf("error" to "Rating must be between 1 and 5"))
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    data class RespondRequest(
+    val rating: Int = 0
+)
