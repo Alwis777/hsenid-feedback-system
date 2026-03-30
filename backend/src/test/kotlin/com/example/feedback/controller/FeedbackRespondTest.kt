@@ -47,12 +47,11 @@ class FeedbackRespondTest {
     }
 
     @Test
-    fun `should return 410 for expired feedback`() {
-        mockMvc.post("/api/public/feedback/feedback-expired-001/respond") {
+    fun should return 400 for rating below 1() {
+        mockMvc.post("/api/public/feedback/feedback-valid-001/respond") {
             contentType = MediaType.APPLICATION_JSON
-            content = """{ "rating": 3 }"""
+            content = """{ "rating": 0 }"""
         }.andExpect {
-            status { isGone() }
+            status { isBadRequest() }
         }
     }
-}
