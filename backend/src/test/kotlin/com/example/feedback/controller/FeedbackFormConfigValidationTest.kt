@@ -46,8 +46,8 @@ class FeedbackFormConfigValidationTest {
                     "expiredReplyText": "Expired"
                 }
             """.trimIndent()
-        }.andExpect {
-            status { isOk() }
+       }.andExpect {
+            status { isBadRequest() }
         }
     }
 
