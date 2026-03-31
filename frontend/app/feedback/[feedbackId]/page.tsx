@@ -54,6 +54,15 @@ export default function FeedbackPage() {
   if (notFound) return <div className="p-8 text-red-500">Feedback request not found</div>
   if (!data) return <div className="p-8 text-red-500">Something went wrong</div>
 
+  if (data.expired) {
+    return (
+      <div className="p-8 max-w-md mx-auto text-center">
+        <h2 className="text-xl font-bold text-orange-500">Link Expired</h2>
+        <p className="text-gray-600 mt-2">{data.expiredReplyText}</p>
+      </div>
+    )
+  }
+
   if (data.responded) {
     return (
       <div className="p-8 max-w-md mx-auto text-center">
