@@ -168,7 +168,7 @@ export default function AdminPage() {
               {config.ratingLabels.map((label, i) => (
                 <div key={i} className="flex flex-col items-center">
                   <button className="w-10 h-10 rounded-full border-2 border-gray-300 hover:border-blue-500">
-                    {i}
+                    {i + 1}
                   </button>
                   <span className="text-xs mt-1">{label}</span>
                 </div>
