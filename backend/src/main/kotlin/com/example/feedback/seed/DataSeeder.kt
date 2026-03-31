@@ -43,13 +43,13 @@ class DataSeeder(
             )
         )
 
-        // Expired feedback request
+       // Expired feedback request
         feedbackRequestRepo.save(
             FeedbackRequest(
                 id = "feedback-expired-001",
                 enterpriseId = "enterprise-001",
                 sessionId = "session-002",
-                expiresAt = Instant.now().plusSeconds(86400)
+                expiresAt = Instant.now().minusSeconds(86400)
             )
         )
 
@@ -59,7 +59,7 @@ class DataSeeder(
                 id = "feedback-responded-001",
                 enterpriseId = "enterprise-001",
                 sessionId = "session-003",
-                expiresAt = Instant.now().minusSeconds(86400),
+                expiresAt = Instant.now().plusSeconds(86400),
                 responded = true,
                 rating = 4,
                 respondedAt = Instant.now().minusSeconds(3600)
