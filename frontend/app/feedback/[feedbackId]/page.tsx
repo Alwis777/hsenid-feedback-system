@@ -72,6 +72,15 @@ export default function FeedbackPage() {
     )
   }
 
+   if (submitted) {
+    return (
+      <div className="p-8 max-w-md mx-auto text-center">
+        <h2 className="text-xl font-bold text-green-600">Thank You! 🎉</h2>
+        <p className="text-gray-600 mt-2">{data.thankYouText}</p>
+      </div>
+    )
+  }
+
   return (
     <div className="p-8 max-w-md mx-auto">
       <h1 className="text-2xl font-bold">{data.headerText}</h1>
