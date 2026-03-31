@@ -99,8 +99,63 @@ export default function AdminPage() {
             onChange={e => setConfig({ ...config, footerText: e.target.value })}
           />
         </div>
+     
+       <div>
+          <label className="block font-medium mb-1">Invalid Reply Text *</label>
+          <input
+            className="w-full border rounded p-2"
+            value={config.invalidReplyText}
+            onChange={e => setConfig({ ...config, invalidReplyText: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Expired Reply Text *</label>
+          <input
+            className="w-full border rounded p-2"
+            value={config.expiredReplyText}
+            onChange={e => setConfig({ ...config, expiredReplyText: e.target.value })}
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Skip For Channels</label>
+          <p className="text-sm text-gray-400 mb-1">Allowed: WHATSAPP, INSTAGRAM, MESSENGER, WEB</p>
+          <input
+            className="w-full border rounded p-2"
+            value={config.skipForChannels.join(", ")}
+            onChange={e => setConfig({
+              ...config,
+              skipForChannels: e.target.value.split(",").map(s => s.trim().toUpperCase()).filter(Boolean)
+            })}
+          />
+        </div>
       </div>
-      </div>
+
+      <button
+        className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        onClick={async () => {
+          setErrors([])
+          setSaved(false)
+          const res = await fetch(
+            `http://localhost:8080/api/admin/enterprises/${enterpriseId}/session-feedback-form`,
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(config)
+            }
+          )
+          const data = await res.json()
+          if (!res.ok) {
+            setErrors(data.errors || ["Something went wrong"])
+          } else {
+            setSaved(true)
+          }
+        }}
+      >
+        Save Configuration
+      </button>
+    </div>
   )
 }
 
