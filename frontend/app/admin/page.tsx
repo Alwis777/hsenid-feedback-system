@@ -155,6 +155,30 @@ export default function AdminPage() {
       >
         Save Configuration
       </button>
+    
+    <div className="mt-10 border-t pt-6">
+        <h2 className="text-xl font-bold mb-4">Preview</h2>
+        <div className="border rounded p-6 bg-gray-50">
+          <h3 className="text-lg font-bold">{config.headerText}</h3>
+          <p className="text-gray-600 mt-1">{config.headerDescription}</p>
+
+          <div className="mt-4">
+            <p className="font-medium mb-2">Select a rating:</p>
+            <div className="flex gap-2">
+              {config.ratingLabels.map((label, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <button className="w-10 h-10 rounded-full border-2 border-gray-300 hover:border-blue-500">
+                    {i}
+                  </button>
+                  <span className="text-xs mt-1">{label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm text-gray-400">{config.footerText}</p>
+        </div>
+      </div>
     </div>
   )
 }
