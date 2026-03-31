@@ -66,6 +66,8 @@ export default function AdminPage() {
             className="w-full border rounded p-2"
             value={config.headerText}
             onChange={e => setConfig({ ...config, headerText: e.target.value })}
+            aria-label="Header text for feedback form"
+            aria-required="true"
           />
         </div>
 
@@ -146,6 +148,7 @@ export default function AdminPage() {
 
       <button
         className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        aria-label="Save feedback form configuration"
         onClick={async () => {
           setErrors([])
           setSaved(false)
