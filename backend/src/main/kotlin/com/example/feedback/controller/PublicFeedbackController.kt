@@ -2,6 +2,7 @@ package com.example.feedback.controller
 
 import com.example.feedback.service.FeedbackFormConfigService
 import com.example.feedback.service.FeedbackRequestService
+import com.example.feedback.service.RespondResult
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -38,7 +39,6 @@ class PublicFeedbackController(
             "invalidReplyText" to config.invalidReplyText
         ))
     }
-}
 
 @PostMapping("/{feedbackId}/respond")
     fun respond(
@@ -68,6 +68,7 @@ class PublicFeedbackController(
                     .body(mapOf("error" to "Rating must be between 1 and 5"))
         }
     }
+}
 
     data class RespondRequest(
     val rating: Int = 0
