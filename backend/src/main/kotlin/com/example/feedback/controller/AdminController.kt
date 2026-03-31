@@ -68,6 +68,12 @@ class AdminController(
         val saved = service.saveConfig(enterpriseId, config)
         return ResponseEntity.ok(saved)
     }
+
+      @GetMapping("/{enterpriseId}/feedback-stats")
+    fun getStats(@PathVariable enterpriseId: String): ResponseEntity<Any> {
+        val stats = service.getStats(enterpriseId)
+        return ResponseEntity.ok(stats)
+    }
 }
 
 data class FeedbackFormConfigRequest(
