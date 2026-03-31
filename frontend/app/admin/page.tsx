@@ -13,11 +13,19 @@ interface FeedbackFormConfig {
   skipForChannels: string[]
 }
 
+interface FeedbackStats {
+  totalRequests: number
+  totalResponded: number
+  averageRating: string
+  ratingBreakdown: { [key: string]: number }
+}
+
 export default function AdminPage() {
   const [config, setConfig] = useState<FeedbackFormConfig | null>(null)
   const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState<string[]>([])
   const [saved, setSaved] = useState(false)
+  const [stats, setStats] = useState<FeedbackStats | null>(null)
 
   const enterpriseId = "enterprise-001"
   useEffect(() => {
@@ -28,6 +36,10 @@ export default function AdminPage() {
         setLoading(false)
       })
       .catch(() => setLoading(false))
+
+    fetch(`http://localhost:8080/api/admin/enterprises/${enterpriseId}/feedback-stats`)
+      .then(res => res.json())
+      .then(data => setStats(data))
   }, [])
 
   if (loading) return <div className="p-8">Loading...</div>
@@ -155,6 +167,45 @@ export default function AdminPage() {
       >
         Save Configuration
       </button>
+
+      {stats && (
+        <div className="mt-10 border-t pt-6">
+          <h2 className="text-xl font-bold mb-4">Feedback Statistics</h2>
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="border rounded p-4 text-center">
+              <p className="text-2xl font-bold text-blue-600">{stats.totalRequests}</p>
+              <p className="text-sm text-gray-500">Total Requests</p>
+            </div>
+            <div className="border rounded p-4 text-center">
+              <p className="text-2xl font-bold text-green-600">{stats.totalResponded}</p>
+              <p className="text-sm text-gray-500">Responded</p>
+            </div>
+            <div className="border rounded p-4 text-center">
+              <p className="text-2xl font-bold text-yellow-500">{stats.averageRating}</p>
+              <p className="text-sm text-gray-500">Average Rating</p>
+            </div>
+          </div>
+          <div className="border rounded p-4">
+            <p className="font-medium mb-3">Rating Breakdown</p>
+            {Object.entries(stats.ratingBreakdown).map(([rating, count]) => (
+              <div key={rating} className="flex items-center gap-3 mb-2">
+                <span className="w-4 text-sm font-medium">{rating}</span>
+                <div className="flex-1 bg-gray-200 rounded-full h-4">
+                  <div
+                    className="bg-blue-500 h-4 rounded-full"
+                    style={{
+                      width: stats.totalResponded > 0
+                        ? `${(count / stats.totalResponded) * 100}%`
+                        : "0%"
+                    }}
+                  />
+                </div>
+                <span className="text-sm text-gray-500">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     
     <div className="mt-10 border-t pt-6">
         <h2 className="text-xl font-bold mb-4">Preview</h2>
