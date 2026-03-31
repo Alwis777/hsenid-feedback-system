@@ -97,6 +97,8 @@ export default function FeedbackPage() {
                     ? "border-blue-500 bg-blue-500 text-white"
                     : "border-gray-300 hover:border-blue-400"}`}
                 onClick={() => setSelectedRating(i + 1)}
+                aria-label={`Rate ${i + 1} out of 5 - ${label}`}
+                aria-pressed={selectedRating === i + 1}
               >
                 {i + 1}
               </button>
@@ -111,6 +113,8 @@ export default function FeedbackPage() {
       <button
         className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={!selectedRating}
+        aria-label="Submit your feedback rating"
+        aria-disabled={!selectedRating}
         onClick={async () => {
           if (!selectedRating) {
             setError("Please select a rating first")
