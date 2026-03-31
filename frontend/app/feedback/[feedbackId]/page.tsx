@@ -82,31 +82,32 @@ export default function FeedbackPage() {
   }
 
   return (
-    <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold">{data.headerText}</h1>
-      <p className="text-gray-600 mt-2">{data.headerDescription}</p>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12">
+        <div className="p-8 max-w-md w-full mx-auto bg-white rounded-xl shadow-md">
+      <h1 className="text-2xl font-bold text-gray-800">{data.headerText}</h1>
+      <p className="text-gray-500 mt-2">{data.headerDescription}</p>
 
       <div className="mt-6">
-        <p className="font-medium mb-3">Select your rating:</p>
+        <p className="font-medium mb-3 text-gray-700">Select your rating:</p>
         <div className="flex gap-3">
           {data.ratingLabels.map((label, i) => (
             <div key={i} className="flex flex-col items-center">
               <button
-                className={`w-12 h-12 rounded-full border-2 font-bold
+                className={`w-12 h-12 rounded-full border-2 font-bold text-sm
                   ${selectedRating === i + 1
                     ? "border-blue-500 bg-blue-500 text-white"
-                    : "border-gray-300 hover:border-blue-400"}`}
+                    : "border-gray-400 bg-gray-50 text-gray-700 hover:border-blue-400 hover:bg-blue-50"}`}
                 onClick={() => setSelectedRating(i + 1)}
                 aria-label={`Rate ${i + 1} out of 5 - ${label}`}
                 aria-pressed={selectedRating === i + 1}
               >
                 {i + 1}
               </button>
-              <span className="text-xs mt-1 text-center">{label}</span>
+              <span className="text-xs mt-1 text-center text-gray-600 font-medium">{label}</span>
             </div>
           ))}
-        </div>
-      </div>
+       </div>
+       </div>
 
       {error && <p className="mt-4 text-red-500">{error}</p>}
 
@@ -140,8 +141,9 @@ export default function FeedbackPage() {
       </button>
 
       {data.footerText && (
-        <p className="mt-6 text-sm text-gray-400">{data.footerText}</p>
+        <p className="mt-6 text-sm text-gray-400 text-center border-t pt-4">{data.footerText}</p>
       )}
+      </div>
     </div>
   )
 }
