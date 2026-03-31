@@ -109,7 +109,8 @@ export default function FeedbackPage() {
       {error && <p className="mt-4 text-red-500">{error}</p>}
 
       <button
-        className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        className="mt-6 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+        disabled={!selectedRating}
         onClick={async () => {
           if (!selectedRating) {
             setError("Please select a rating first")
