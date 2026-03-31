@@ -133,10 +133,14 @@ Response 200:
   "responded": false,
   "expired": false,
   "headerText": "Rate Your Experience",
+  "headerDescription": "Tell us how your chat went today",
+  "footerText": "Thank you for using our service",
   "ratingLabels": ["Terrible", "Bad", "Okay", "Good", "Excellent"],
   "thankYouText": "Thanks for your feedback!",
-  "expiredReplyText": "Sorry this link has expired"
+  "expiredReplyText": "Sorry this link has expired",
+  "invalidReplyText": "That is not a valid rating"
 }
+
 ```
 
 Response 404 is returned when the feedback request is not found.
