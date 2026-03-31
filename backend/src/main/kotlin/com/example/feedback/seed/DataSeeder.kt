@@ -24,7 +24,7 @@ class DataSeeder(
             headerText = "Rate Your Experience",
             headerDescription = "Tell us how your chat went today",
             footerText = "Thank you for using our service",
-            ratingLabels = listOf("Terrible", "Bad", "Okay", "Good","Excellent),
+            ratingLabels = listOf("Terrible", "Bad", "Okay", "Good","Excellent"),
             thankYouText = "Thanks for your feedback!",
             invalidReplyText = "That is not a valid rating",
             expiredReplyText = "Sorry this link has expired",
